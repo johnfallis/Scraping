@@ -1,0 +1,20 @@
+services:
+    scraping_client:
+        class: GuzzleHttp\Client
+    fuse_aware_bundle_scraping.bot.black_ink_org_bot:
+        class: JohnFallis\Bundle\ScrapingBundle\Bot\BlackInkOrgBot
+        arguments: ["@fuse_aware_bundle_scraping.component.scraping_tool.scraping_client"]
+    fuse_aware_bundle_scraping.component.scraping_tool.immutable_dom:
+        class: JohnFallis\Bundle\ScrapingBundle\Component\ScrapingTool\ImmutableDom
+        calls:
+            - method: setLogger
+              arguments:
+                  - '@logger'
+    fuse_aware_bundle_scraping.component.scraping_tool.scraping_client:
+        class: JohnFallis\Bundle\ScrapingBundle\Component\ScrapingTool\ScrapingClient
+        arguments: ["@scraping_client", "@fuse_aware_bundle_scraping.component.scraping_tool.immutable_dom"]
+        calls:
+            - method: setLogger
+              arguments:
+                  - '@logger'
+

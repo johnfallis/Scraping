@@ -1,0 +1,4 @@
+fuse_aware_bundle_scraping:
+    resource: "@JohnFallisBundleScrapingBundle/Controller/"
+    type:     annotation
+    prefix:   /
